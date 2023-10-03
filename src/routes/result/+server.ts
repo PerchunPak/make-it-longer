@@ -1,4 +1,5 @@
 import { faker } from '@faker-js/faker';
+import { processUrl } from '$lib/server/processUrl.ts';
 
 function delay(ms: number): Promise<void> {
 	return new Promise((res) => setTimeout(res, ms));
@@ -12,13 +13,10 @@ export function GET() {
 				controller.enqueue(encoder.encode(JSON.stringify(data)));
 			};
 
-			for (let i = 0; i < 20; i++) {
-				send({ to: faker.internet.domainName(), screenshot: '/screenshot' });
-				await delay(1000);
-			}
+			await processUrl(url, send);
+
 			controller.close();
-		},
-		cancel() {}
+		}
 	});
 
 	return new Response(readable, {
