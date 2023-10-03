@@ -469,3 +469,6 @@ $RECYCLE.BIN/
 *.lnk
 
 # End of https://www.toptal.com/developers/gitignore/api/node,linux,python,vercel,windows,webstorm+all,visualstudiocode,svelte
+
+# Sentry Auth Token
+.sentryclirc

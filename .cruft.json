@@ -1,18 +1,16 @@
 {
-  "template": "https://github.com/PerchunPak/svelte-template",
-  "commit": "6575b2c5ac5220642802d6f2d6652a687cafff68",
-  "checkout": null,
-  "context": {
-    "cookiecutter": {
-      "project_name": "make-it-longer",
-      "organization": "PerchunPak",
-      "project_description": "Unshorts shorten links (like bit.ly) and shows history of redirects.",
-      "center_everything": "y",
-      "_copy_without_render": [
-        ".venv"
-      ],
-      "_template": "https://github.com/PerchunPak/svelte-template"
-    }
-  },
-  "directory": null
+	"template": "https://github.com/PerchunPak/svelte-template",
+	"commit": "6575b2c5ac5220642802d6f2d6652a687cafff68",
+	"checkout": null,
+	"context": {
+		"cookiecutter": {
+			"project_name": "make-it-longer",
+			"organization": "PerchunPak",
+			"project_description": "Unshorts shorten links (like bit.ly) and shows history of redirects.",
+			"center_everything": "y",
+			"_copy_without_render": [".venv"],
+			"_template": "https://github.com/PerchunPak/svelte-template"
+		}
+	},
+	"directory": null
 }

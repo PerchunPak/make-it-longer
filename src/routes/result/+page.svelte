@@ -12,9 +12,9 @@
 
 	if (url !== null) {
 		onMount(async () => {
-      const response = await fetch(`/result?l=${encodeURIComponent(url)}`);
-      if (response.body === null) throw Error('Response body is null')
-      const reader = response.body.pipeThrough(new TextDecoderStream()).getReader();
+			const response = await fetch(`/result?l=${encodeURIComponent(url)}`);
+			if (response.body === null) throw Error('Response body is null');
+			const reader = response.body.pipeThrough(new TextDecoderStream()).getReader();
 
 			// eslint-disable-next-line no-constant-condition
 			while (true) {

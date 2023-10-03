@@ -31,7 +31,11 @@
 			<span class="label-text-alt">
 				Try
 				<!-- svelte-ignore a11y-click-events-have-key-events -->
-				<span class="link" role="button" tabindex=0 on:click={() => (inputValue = 'https://s.perchun.it/mil-example')}
+				<span
+					class="link"
+					role="button"
+					tabindex="0"
+					on:click={() => (inputValue = 'https://s.perchun.it/mil-example')}
 					>https://s.perchun.it/mil-example</span
 				>.
 			</span>
