@@ -13,6 +13,7 @@
 
 <div class="inline-flex items-center mt-10 w-full sm:w-2/3 xl:w-2/5">
 	<div class="form-control w-full">
+		<!-- svelte-ignore a11y-label-has-associated-control -->
 		<label class="label">
 			<span class="label-text">URL to unshort</span>
 		</label>
@@ -25,11 +26,13 @@
 			on:submit|preventDefault={redirect}
 			on:keypress={(e) => e.key === 'Enter' && inputValue !== '' && redirect()}
 		/>
+		<!-- svelte-ignore a11y-label-has-associated-control -->
 		<label class="label">
 			<span class="label-text-alt">
 				Try
-				<a class="link" on:click={() => (inputValue = 'https://s.perchun.it/mil-example')}
-					>https://s.perchun.it/mil-example</a
+				<!-- svelte-ignore a11y-click-events-have-key-events -->
+				<span class="link" role="button" tabindex=0 on:click={() => (inputValue = 'https://s.perchun.it/mil-example')}
+					>https://s.perchun.it/mil-example</span
 				>.
 			</span>
 		</label>

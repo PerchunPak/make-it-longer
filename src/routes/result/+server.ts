@@ -1,8 +1,6 @@
 import { processUrl } from '$lib/server/processUrl.ts';
 
-function validateUrl(url: string | null): boolean {
-	if (url === null) return false;
-
+function validateUrl(url: string): boolean {
 	try {
 		new URL(url);
 	} catch (_) {
@@ -13,7 +11,7 @@ function validateUrl(url: string | null): boolean {
 
 export function GET(event) {
 	const url = event.url.searchParams.get('l');
-	if (!validateUrl(url)) {
+	if (url === null || !validateUrl(url)) {
 		return new Response('Invalid URL (must be provided and be parsable)', { status: 400 });
 	}
 
