@@ -31,7 +31,9 @@
 						<div class="mockup-browser-toolbar">
 							<div class="input">{redirect}</div>
 						</div>
-						<img src="/screenshot" class="p-2 m-auto" alt="Screenshot of the page" />
+						<div class="flex justify-center p-2 border-t border-base-300">
+							<img src="/screenshot" alt="Screenshot of the page" />
+						</div>
 					</div>
 				</div>
 			</div>
