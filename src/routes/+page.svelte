@@ -28,8 +28,8 @@
 		<label class="label">
 			<span class="label-text-alt">
 				Try
-				<a class="link" on:click={() => (inputValue = 'https://mil.perchun.it/example')}
-					>https://mil.perchun.it/example</a
+				<a class="link" on:click={() => (inputValue = 'https://s.perchun.it/mil-example')}
+					>https://s.perchun.it/mil-example</a
 				>.
 			</span>
 		</label>
