@@ -9,9 +9,9 @@
 </script>
 
 <h1 class="text-3xl font-bold">Make it longer</h1>
-<p class="mt-3">Unshorts shorten links (like bit.ly) and shows history of redirects.</p>
+<p class="mt-3 text-center">Unshorts shorten links (like bit.ly) and shows history of redirects.</p>
 
-<div class="inline-flex items-center mt-10 w-2/5">
+<div class="inline-flex items-center mt-10 w-full sm:w-2/3 xl:w-2/5">
 	<div class="form-control w-full">
 		<label class="label">
 			<span class="label-text">URL to unshort</span>

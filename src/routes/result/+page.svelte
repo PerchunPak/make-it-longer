@@ -33,7 +33,7 @@
 
 <div class="w-2/3">
 	{#if url !== null}
-		<div class="grid grid-cols-2">
+		<div class="grid grid-cols-1 lg:grid-cols-2">
 			<div>
 				<p class="text-lg py-3">Redirects history:</p>
 				<ol class="list-disc">
