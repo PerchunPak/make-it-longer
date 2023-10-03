@@ -1,42 +1,69 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
+	import { page } from '$app/stores';
 
-	const result: { redirects: { to: string; screenshot: string }[] } = { redirects: [] };
+	const url = $page.url.searchParams.get('l');
 
-	async function subscribe() {
-		const response = await fetch('/result');
-		const reader = response.body.pipeThrough(new TextDecoderStream()).getReader();
-		while (true) {
-			const { value, done } = await reader.read();
-			if (done) break;
-			result.redirects.push(JSON.parse(value));
-			result.redirects = result.redirects;
-		}
+	const result: { redirects: string[]; screenshot?: string; areRedirectsEnded: boolean } = {
+		redirects: [],
+		areRedirectsEnded: false
+	};
+
+	if (url !== null) {
+		onMount(async () => {
+			const response = await fetch(`/result?l=${encodeURIComponent(url)}`);
+			const reader = response.body.pipeThrough(new TextDecoderStream()).getReader();
+
+			while (true) {
+				const { value, done } = await reader.read();
+				if (done) break;
+
+				if (value.startsWith('data:image/png;base64,')) result.areRedirectsEnded = true;
+				if (result.areRedirectsEnded)
+					result.screenshot = `${result.screenshot !== undefined ? result.screenshot : ''}${value}`;
+				else {
+					result.redirects.push(value);
+					result.redirects = result.redirects;
+				}
+			}
+		});
 	}
-
-	onMount(subscribe);
 </script>
 
 <div class="w-2/3">
-	<p class="text-lg pb-3">Redirects history:</p>
-	<div class="join join-vertical w-full bg-base-200">
-		{#each result.redirects as redirect}
-			<div class="collapse collapse-arrow join-item border border-base-300">
-				<input type="radio" name="my-accordion-4" />
-				<div class="collapse-title font-medium">
-					{redirect.to}
-				</div>
-				<div class="collapse-content">
-					<div class="mockup-browser border bg-base-300">
-						<div class="mockup-browser-toolbar">
-							<div class="input">{redirect.to}</div>
-						</div>
-						<div class="flex justify-center p-2 border-t border-base-300">
-							<img src={redirect.screenshot} alt="Screenshot of the page" />
-						</div>
+	{#if url !== null}
+		<div class="grid grid-cols-2">
+			<div>
+				<p class="text-lg py-3">Redirects history:</p>
+				<ol class="list-disc">
+					{#each result.redirects as redirectedTo}
+						<li class="ml-4">{redirectedTo}</li>
+					{/each}
+				</ol>
+				{#if !result.areRedirectsEnded}
+					<div class="flex mt-5">
+						<span class="loading loading-spinner loading-lg m-auto" />
 					</div>
+				{/if}
+			</div>
+			<div>
+				<p class="text-lg py-3">Screenshot of the destination:</p>
+				<div class="flex h-full">
+					{#if result.screenshot === undefined}
+						<span class="loading loading-spinner loading-lg m-auto" />
+					{:else}
+						<img src={result.screenshot} class="m-auto" alt="Screenshot of the destination" />
+					{/if}
 				</div>
 			</div>
-		{/each}
-	</div>
+		</div>
+	{:else}
+		<div class="flex">
+			<h1 class="text-xl pb-3 m-auto">
+				No URL was specified, please return to <a href="/" class="link link-primary"
+					>the main page</a
+				> and enter a link.
+			</h1>
+		</div>
+	{/if}
 </div>

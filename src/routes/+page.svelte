@@ -1,6 +1,11 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
-	import { url as inputValue } from '$lib/urlStore.ts';
+
+	let inputValue: string;
+
+	function redirect() {
+		goto(`/result?l=${encodeURIComponent(inputValue)}`);
+	}
 </script>
 
 <h1 class="text-3xl font-bold">Make it longer</h1>
@@ -16,24 +21,20 @@
 			type="text"
 			class="input input-bordered"
 			autofocus
-			bind:value={$inputValue}
-			on:submit|preventDefault={() => goto('/result')}
-			on:keypress={(e) => e.key === 'Enter' && $inputValue !== '' && goto('/result')}
+			bind:value={inputValue}
+			on:submit|preventDefault={redirect}
+			on:keypress={(e) => e.key === 'Enter' && inputValue !== '' && redirect()}
 		/>
 		<label class="label">
 			<span class="label-text-alt">
 				Try
-				<a class="link" on:click={() => ($inputValue = 'https://mil.perchun.it/example')}
+				<a class="link" on:click={() => (inputValue = 'https://mil.perchun.it/example')}
 					>https://mil.perchun.it/example</a
 				>.
 			</span>
 		</label>
 	</div>
-	<button
-		class="btn btn-primary ml-5"
-		disabled={$inputValue === ''}
-		on:click={() => goto('/result')}
-	>
+	<button class="btn btn-primary ml-5" disabled={inputValue === ''} on:click={redirect}>
 		Unshort
 	</button>
 </div>

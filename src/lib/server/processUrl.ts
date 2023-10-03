@@ -1,9 +1,6 @@
 import puppeteer from 'puppeteer';
 
-export async function processUrl(
-	url: string,
-	send: (event: { to: string; screenshot: string }) => void
-): Promise<void> {
+export async function processUrl(url: string, send: (event: string) => void): Promise<void> {
 	const browser = await puppeteer.launch({ headless: 'new' });
 	const page = await browser.newPage();
 	await page.setViewport({ width: 1024, height: 576 });
@@ -14,10 +11,18 @@ export async function processUrl(
 		if (e.type !== 'Document') {
 			return;
 		}
-		const screenshot = await page.screenshot();
-		send({ to: e.documentURL, screenshot: screenshot.toString('base64') });
+		send(e.documentURL);
 	});
 
 	await page.goto(url, { waitUntil: 'networkidle2' });
+
+	const screenshot = await page.screenshot({
+		fullPage: true,
+		encoding: 'base64',
+		type: 'webp',
+		quality: 80
+	});
+	send(`data:image/png;base64,${screenshot}`);
+
 	await browser.close();
 }
