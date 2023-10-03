@@ -4,14 +4,14 @@
 	const result: { redirects: { to: string; screenshot: string }[] } = { redirects: [] };
 
 	async function subscribe() {
-    const response = await fetch('/result');
-    const reader = response.body.pipeThrough(new TextDecoderStream()).getReader();
-    while (true) {
-      const { value, done } = await reader.read();
-      if (done) break;
-      result.redirects.push(JSON.parse(value));
-	    result.redirects = result.redirects
-    }
+		const response = await fetch('/result');
+		const reader = response.body.pipeThrough(new TextDecoderStream()).getReader();
+		while (true) {
+			const { value, done } = await reader.read();
+			if (done) break;
+			result.redirects.push(JSON.parse(value));
+			result.redirects = result.redirects;
+		}
 	}
 
 	onMount(subscribe);
