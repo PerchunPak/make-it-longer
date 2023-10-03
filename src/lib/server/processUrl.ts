@@ -6,7 +6,7 @@ export async function processUrl(
 ): Promise<void> {
 	const browser = await puppeteer.launch({ headless: 'new' });
 	const page = await browser.newPage();
-	await page.setViewport({ width: 1920, height: 1080 });
+	await page.setViewport({ width: 1024, height: 576 });
 
 	const client = await page.target().createCDPSession();
 	await client.send('Network.enable');
