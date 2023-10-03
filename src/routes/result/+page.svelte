@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import { page } from '$app/stores';
+  import {slide, blur} from "svelte/transition";
 
 	const url = $page.url.searchParams.get('l');
 
@@ -37,12 +38,12 @@
 				<p class="text-lg py-3">Redirects history:</p>
 				<ol class="list-disc">
 					{#each result.redirects as redirectedTo}
-						<li class="ml-4">{redirectedTo}</li>
+						<li class="ml-4" transition:slide><a href={redirectedTo} class="link link-primary">{redirectedTo}</a></li>
 					{/each}
 				</ol>
 				{#if !result.areRedirectsEnded}
 					<div class="flex mt-5">
-						<span class="loading loading-spinner loading-lg m-auto" />
+						<span class="loading loading-spinner loading-lg m-auto" transition:slide />
 					</div>
 				{/if}
 			</div>
@@ -52,7 +53,7 @@
 					{#if result.screenshot === undefined}
 						<span class="loading loading-spinner loading-lg m-auto" />
 					{:else}
-						<img src={result.screenshot} class="m-auto" alt="Screenshot of the destination" />
+						<img src={result.screenshot} class="m-auto" alt="Screenshot of the destination" transition:blur />
 					{/if}
 				</div>
 			</div>
