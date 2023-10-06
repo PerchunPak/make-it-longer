@@ -5,6 +5,11 @@ FROM node:20-slim AS base
 
 WORKDIR /app
 
+RUN \
+  apt-get update && \
+  apt-get install ca-certificates && \
+  apt-get clean
+
 ENV PNPM_HOME="/pnpm"
 ENV PATH="$PNPM_HOME:$PATH"
 RUN corepack enable
