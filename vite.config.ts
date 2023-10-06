@@ -11,13 +11,5 @@ export default defineConfig({
 			}
 		}),
 		sveltekit()
-	],
-	define: {
-		'import.meta.vitest': 'undefined'
-	},
-	test: {
-		globals: true,
-		environment: 'jsdom',
-		includeSource: ['{src,test}/**/*.{js,ts}']
-	}
+	]
 });
