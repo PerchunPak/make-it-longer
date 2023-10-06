@@ -28,7 +28,6 @@
 		"postcss-load-config": "^4.0.1",
 		"prettier": "^2.8.0",
 		"prettier-plugin-svelte": "^2.10.1",
-		"puppeteer": "^21.3.6",
 		"svelte": "^4.0.5",
 		"svelte-check": "^3.4.3",
 		"tailwindcss": "^3.3.2",
@@ -37,7 +36,8 @@
 		"vite": "^4.4.2"
 	},
 	"dependencies": {
-		"@sentry/sveltekit": "^7.70.0"
+		"@sentry/sveltekit": "^7.70.0",
+		"puppeteer": "^21.3.6"
 	},
 	"type": "module"
 }
